@@ -11,13 +11,15 @@ class AllVideo(scrapy.Spider):
     name = 'all'
 
     def start_requests(self):
-        yield scrapy.Request(
-            url='https://site-api.project1service.com/v2/releases?dateReleased=%3C2020-10-08&limit=96'
-                '&offset=0&orderBy=-dateReleased&type=scene')
+        start_date = self.settings.get('START_DATE')
+        end_date = self.settings.get('END_DATE')
+        self.base_url = 'https://site-api.project1service.com/v2/releases?dateReleased=>{0},' \
+                        '<{1}&limit=96&offset=0&orderBy=-dateReleased&type=scene'.format(start_date, end_date)
+        yield scrapy.Request(url=self.base_url)
 
     def parse(self, response: HtmlResponse, **kwargs):
         total = response.json().get('meta').get('total')
-        base_url = 'https://site-api.project1service.com/v2/releases?dateReleased=%3C2020-10-08&limit=96&offset={0}&orderBy=-dateReleased&type=scene'
+        base_url = self.base_url.replace('offset=0', 'offset={0}')
         round_number = math.floor(total / 96)
         for i in range(round_number):
             # 根据总的视频条数 计算 offset 的值

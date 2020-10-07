@@ -20,6 +20,9 @@ RETRY_ENABLED = True
 RETRY_TIMES = 10
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 408]
 
+START_DATE = '2020-08-01'
+END_DATE = '2020-10-08'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) ' \
              'Chrome/85.0.4183.121 Safari/537.36 '
@@ -49,8 +52,8 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,'
               'application/signed-exchange;v=b3;q=0.9',
     'Accept-Language': 'zh-CN,zh;q=0.9',
-    'authorization': '',
-    'instance': ''
+    'authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtaW5kZ2Vlay5vbmUtbWEuZGF0YS1hcGkiLCJhdWQiOiJtaW5kZ2Vlay5vbmUtbWEuZGF0YS1hcGkiLCJzdWIiOiJhdXRoIiwiaWF0IjoxNjAyMDUxMjMzLCJleHAiOjE2MDIwNjIwMzMsImlkIjoxNTE5NDEyNTN9.BBPg7sJN6IeXBTJKcq-kAHV8ZKNh1AJ9DLi0X9yFLlI',
+    'instance': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtaW5kZ2VlayIsImF1ZCI6Im1pbmRnZWVrIiwic3ViIjoiaW5zdGFuY2UtYXBpIiwiZXhwIjoxNjAyMjAxNjAwLCJpZCI6MTQ4OTAyLCJicmFuZCI6ImJyYXp6ZXJzIiwiaG9zdG5hbWUiOiJzaXRlLW1hLmJyYXp6ZXJzLmNvbSJ9.X8tRqoGJtrB8EK885LzSlA_uoVNjwaYfld6NpGNk9fs'
 }
 
 # Enable or disable spider middlewares
