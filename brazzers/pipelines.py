@@ -5,6 +5,7 @@
 
 
 # useful for handling different item types with a single interface
+import requests
 from itemadapter import ItemAdapter
 from brazzers.spiders.Starter import AllVideo
 from brazzers.items import BrazzersItem
@@ -35,4 +36,19 @@ class SaveInfoPipeline:
             self.file.write('name: {0}\n'.format(item['title']))
             self.file.write('publish date: {0}\n'.format(item['release_date']))
             self.file.write('description: {0}\n\n\n'.format(item['desc']))
+        return item
+
+
+class DownloadPipeline:
+    def process_item(self, item, spider: AllVideo):
+        base_url = 'http://127.0.0.1:8900/jsonrpc'
+        token = 'token:' + spider.settings.get('ARIA_TOKEN')
+        if isinstance(item, BrazzersItem):
+            download_data = {
+                'jsonrpc': '2.0',
+                'method': 'aria2.addUri',
+                'id': '0',
+                'params': [token, [item['download_url']], {'out': item['title'] + '.mp4'}]
+            }
+            requests.post(url=base_url, json=download_data)
         return item

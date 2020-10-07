@@ -22,6 +22,7 @@ RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 408]
 
 START_DATE = '2020-08-01'
 END_DATE = '2020-10-08'
+ARIA_TOKEN = ''
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) ' \
@@ -78,7 +79,8 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'brazzers.pipelines.BrazzersPipeline': 300,
-    'brazzers.pipelines.SaveInfoPipeline': 301
+    'brazzers.pipelines.SaveInfoPipeline': 301,
+    'brazzers.pipelines.DownloadPipeline': 302
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
