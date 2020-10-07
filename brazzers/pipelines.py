@@ -6,9 +6,10 @@
 
 # useful for handling different item types with a single interface
 import requests
-from itemadapter import ItemAdapter
-from brazzers.spiders.Starter import AllVideo
+
 from brazzers.items import BrazzersItem
+from brazzers.lib.download_header import random_other_headers
+from brazzers.spiders.Starter import AllVideo
 
 
 class BrazzersPipeline:
@@ -48,7 +49,8 @@ class DownloadPipeline:
                 'jsonrpc': '2.0',
                 'method': 'aria2.addUri',
                 'id': '0',
-                'params': [token, [item['download_url']], {'out': item['title'] + '.mp4'}]
+                'params': [token, [item['download_url']],
+                           {'out': item['title'] + '.mp4', "header": random_other_headers()}]
             }
             requests.post(url=base_url, json=download_data)
         return item
