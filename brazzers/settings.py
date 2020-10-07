@@ -53,8 +53,8 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,'
               'application/signed-exchange;v=b3;q=0.9',
     'Accept-Language': 'zh-CN,zh;q=0.9',
-    'authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtaW5kZ2Vlay5vbmUtbWEuZGF0YS1hcGkiLCJhdWQiOiJtaW5kZ2Vlay5vbmUtbWEuZGF0YS1hcGkiLCJzdWIiOiJhdXRoIiwiaWF0IjoxNjAyMDUxMjMzLCJleHAiOjE2MDIwNjIwMzMsImlkIjoxNTE5NDEyNTN9.BBPg7sJN6IeXBTJKcq-kAHV8ZKNh1AJ9DLi0X9yFLlI',
-    'instance': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtaW5kZ2VlayIsImF1ZCI6Im1pbmRnZWVrIiwic3ViIjoiaW5zdGFuY2UtYXBpIiwiZXhwIjoxNjAyMjAxNjAwLCJpZCI6MTQ4OTAyLCJicmFuZCI6ImJyYXp6ZXJzIiwiaG9zdG5hbWUiOiJzaXRlLW1hLmJyYXp6ZXJzLmNvbSJ9.X8tRqoGJtrB8EK885LzSlA_uoVNjwaYfld6NpGNk9fs'
+    'authorization': '',
+    'instance': ''
 }
 
 # Enable or disable spider middlewares
