@@ -50,7 +50,7 @@ class DownloadPipeline:
                 'method': 'aria2.addUri',
                 'id': '0',
                 'params': [token, [item['download_url']],
-                           {'out': item['type'] + '/' + item['title'] + '.mp4', "header": random_other_headers()}]
+                           {'out': item['title'] + '.mp4', "header": random_other_headers()}]
             }
             requests.post(url=base_url, json=download_data)
         return item

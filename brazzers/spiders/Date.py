@@ -33,8 +33,7 @@ class AllVideo(scrapy.Spider):
             desc = result.get('description')
             download_url = self.extract_download_url(result)
             if download_url is not None:
-                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url,
-                                   type='date')
+                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url)
             else:
                 self.logger.warn('no download,the video name: %s', title)
 
@@ -45,8 +44,7 @@ class AllVideo(scrapy.Spider):
             desc = result.get('description')
             download_url = self.extract_download_url(result)
             if download_url is not None:
-                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url,
-                                   type='date')
+                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url)
             else:
                 self.logger.warn('no download,the video name: %s', title)
 
