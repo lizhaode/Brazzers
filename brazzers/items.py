@@ -13,3 +13,4 @@ class BrazzersItem(scrapy.Item):
     release_date = scrapy.Field()
     desc = scrapy.Field()
     download_url = scrapy.Field()
+    type = scrapy.Field()

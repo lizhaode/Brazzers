@@ -8,13 +8,12 @@ from brazzers.items import BrazzersItem
 
 
 class AllVideo(scrapy.Spider):
-    name = 'all'
+    name = 'tag'
 
     def start_requests(self):
-        start_date = self.settings.get('START_DATE')
-        end_date = self.settings.get('END_DATE')
-        self.base_url = 'https://site-api.project1service.com/v2/releases?dateReleased=>{0},' \
-                        '<{1}&limit=96&offset=0&orderBy=-dateReleased&type=scene'.format(start_date, end_date)
+        tag_id = self.settings.get('TAG_ID')
+        self.base_url = '''https://site-api.project1service.com/v2/releases?
+        limit=96&offset=0&orderBy=-dateReleased&tagId={0}'''.format(tag_id)
         yield scrapy.Request(url=self.base_url)
 
     def parse(self, response: HtmlResponse, **kwargs):
@@ -33,7 +32,8 @@ class AllVideo(scrapy.Spider):
             desc = result.get('description')
             download_url = self.extract_download_url(result)
             if download_url is not None:
-                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url)
+                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url,
+                                   type='tag')
             else:
                 self.logger.warn('no download,the video name: %s', title)
 
@@ -44,7 +44,8 @@ class AllVideo(scrapy.Spider):
             desc = result.get('description')
             download_url = self.extract_download_url(result)
             if download_url is not None:
-                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url)
+                yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url,
+                                   type='tag')
             else:
                 self.logger.warn('no download,the video name: %s', title)
 

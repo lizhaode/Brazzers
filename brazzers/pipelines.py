@@ -9,7 +9,7 @@ import requests
 
 from brazzers.items import BrazzersItem
 from brazzers.lib.download_header import random_other_headers
-from brazzers.spiders.Starter import AllVideo
+from brazzers.spiders.Date import AllVideo
 
 
 class BrazzersPipeline:
@@ -50,7 +50,7 @@ class DownloadPipeline:
                 'method': 'aria2.addUri',
                 'id': '0',
                 'params': [token, [item['download_url']],
-                           {'out': item['title'] + '.mp4', "header": random_other_headers()}]
+                           {'out': item['type'] + '/' + item['title'] + '.mp4', "header": random_other_headers()}]
             }
             requests.post(url=base_url, json=download_data)
         return item

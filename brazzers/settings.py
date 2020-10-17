@@ -20,8 +20,10 @@ RETRY_ENABLED = True
 RETRY_TIMES = 10
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 408]
 
-START_DATE = '2020-08-01'
+START_DATE = '2020-05-01'
 END_DATE = '2020-10-08'
+TAG_ID = ''
+COLLECTION_ID = ''
 ARIA_TOKEN = ''
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
