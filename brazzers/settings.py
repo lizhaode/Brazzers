@@ -25,6 +25,7 @@ END_DATE = '2020-10-08'
 TAG_ID = ''
 COLLECTION_ID = ''
 ARIA_TOKEN = ''
+WHICH_ENABLE = 'tag'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) ' \

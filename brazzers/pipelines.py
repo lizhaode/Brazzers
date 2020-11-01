@@ -9,30 +9,30 @@ import requests
 
 from brazzers.items import BrazzersItem
 from brazzers.lib.download_header import random_other_headers
-from brazzers.spiders.Date import AllVideo
+from brazzers.spiders.Base import BaseSpider
 
 
 class BrazzersPipeline:
-    def open_spider(self, spider: AllVideo):
+    def open_spider(self, spider: BaseSpider):
         self.file = open('url.txt', 'w')
 
-    def close_spider(self, spider: AllVideo):
+    def close_spider(self, spider: BaseSpider):
         self.file.close()
 
-    def process_item(self, item, spider: AllVideo):
+    def process_item(self, item, spider: BaseSpider):
         if isinstance(item, BrazzersItem):
             self.file.write(item['download_url'] + '\n')
         return item
 
 
 class SaveInfoPipeline:
-    def open_spider(self, spider: AllVideo):
+    def open_spider(self, spider: BaseSpider):
         self.file = open('info.txt', 'w')
 
-    def close_spider(self, spider: AllVideo):
+    def close_spider(self, spider: BaseSpider):
         self.file.close()
 
-    def process_item(self, item, spider: AllVideo):
+    def process_item(self, item, spider: BaseSpider):
         if isinstance(item, BrazzersItem):
             self.file.write('name: {0}\n'.format(item['title']))
             self.file.write('publish date: {0}\n'.format(item['release_date']))
@@ -41,7 +41,7 @@ class SaveInfoPipeline:
 
 
 class DownloadPipeline:
-    def process_item(self, item, spider: AllVideo):
+    def process_item(self, item, spider: BaseSpider):
         base_url = 'http://127.0.0.1:8900/jsonrpc'
         token = 'token:' + spider.settings.get('ARIA_TOKEN')
         if isinstance(item, BrazzersItem):
