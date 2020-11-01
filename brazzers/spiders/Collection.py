@@ -1,10 +1,10 @@
-import datetime
 import math
 
 import scrapy
 from scrapy.http.response.html import HtmlResponse
 
 from brazzers.items import BrazzersItem
+from brazzers.lib.Utils import parse_date, extract_download_url
 
 
 class AllVideo(scrapy.Spider):
@@ -28,9 +28,9 @@ class AllVideo(scrapy.Spider):
         # 想要的结果数据都在 result 中, 他是一个 list
         for result in response.json().get('result'):  # type:dict
             title = result.get('title')
-            release_date = self.parse_date(result.get('dateReleased'))
+            release_date = parse_date(result.get('dateReleased'))
             desc = result.get('description')
-            download_url = self.extract_download_url(result)
+            download_url = extract_download_url(result)
             if download_url is not None:
                 yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url)
             else:
@@ -39,27 +39,10 @@ class AllVideo(scrapy.Spider):
     def offset_parse(self, response: HtmlResponse, **kwargs):
         for result in response.json().get('result'):  # type:dict
             title = result.get('title')
-            release_date = self.parse_date(result.get('dateReleased'))
+            release_date = parse_date(result.get('dateReleased'))
             desc = result.get('description')
-            download_url = self.extract_download_url(result)
+            download_url = extract_download_url(result)
             if download_url is not None:
                 yield BrazzersItem(title=title, release_date=release_date, desc=desc, download_url=download_url)
             else:
                 self.logger.warn('no download,the video name: %s', title)
-
-    def extract_download_url(self, result: dict) -> str or None:
-        # 有的视频没有提供播放地址, 是一个 []
-        video_info = result.get('videos')
-        if len(video_info) != 0:
-            files = video_info.get('full').get('files')
-            if files.get('1080p') is None:
-                if files.get('720p') is None:
-                    return None
-                else:
-                    return files.get('720p').get('urls').get('download')
-            else:
-                return files.get('1080p').get('urls').get('download')
-
-    def parse_date(self, date: str) -> str:
-        time = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S%z')
-        return time.astimezone().strftime('%Y-%m-%d %H:%M:%S')
