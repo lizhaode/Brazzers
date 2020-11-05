@@ -32,8 +32,9 @@ class BaseSpider(scrapy.Spider):
         self.logger.warn('videos count: %s', total)
         count = response.json().get('meta').get('count')
         if count != 0:
+            old_offset = int(response.url.split('offset=')[1].split('&')[0])
             offset = 96 + int(response.url.split('offset=')[1].split('&')[0])
-            base_url = response.url.replace('offset=0', 'offset={0}')
+            base_url = response.url.replace('offset={0}'.format(old_offset), 'offset={0}')
             yield scrapy.Request(url=base_url.format(offset))
 
             # 想要的结果数据都在 result 中, 他是一个 list
