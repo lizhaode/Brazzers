@@ -6,6 +6,7 @@
 
 # useful for handling different item types with a single interface
 import requests
+import time
 
 from brazzers.items import BrazzersItem
 from brazzers.lib.download_header import random_other_headers
@@ -53,4 +54,15 @@ class DownloadPipeline:
                            {'out': item['title'] + '.mp4', "header": random_other_headers()}]
             }
             requests.post(url=base_url, json=download_data)
+
+            status_data = {
+                'jsonrpc': '2.0',
+                'method': 'aria2.getGlobalStat',
+                'id': '0',
+                'params': [token]
+            }
+            active = 10
+            while active < 3:
+                time.sleep(20)
+                active = requests.post(url=base_url, json=status_data).json().get('result').get('numActive')
         return item
