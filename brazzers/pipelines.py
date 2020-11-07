@@ -54,20 +54,4 @@ class DownloadPipeline:
                            {'out': item['title'] + '.mp4', "header": random_other_headers()}]
             }
             requests.post(url=base_url, json=download_data)
-
-            status_data = {
-                'jsonrpc': '2.0',
-                'method': 'aria2.getGlobalStat',
-                'id': '0',
-                'params': [token]
-            }
-            while True:
-                try:
-                    active = int(requests.post(url=base_url, json=status_data).json().get('result').get('numActive'))
-                    if active > 2:
-                        time.sleep(40)
-                    else:
-                        break
-                except requests.RequestException as e:
-                    pass
         return item
