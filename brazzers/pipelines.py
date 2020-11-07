@@ -61,11 +61,13 @@ class DownloadPipeline:
                 'id': '0',
                 'params': [token]
             }
-            active = 10
-            while active > 2:
-                time.sleep(40)
+            while True:
                 try:
                     active = int(requests.post(url=base_url, json=status_data).json().get('result').get('numActive'))
+                    if active > 2:
+                        time.sleep(40)
+                    else:
+                        break
                 except requests.RequestException as e:
-                    active = 10
+                    pass
         return item
