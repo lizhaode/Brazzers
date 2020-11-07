@@ -15,7 +15,7 @@ from brazzers.spiders.Base import BaseSpider
 
 class BrazzersPipeline:
     def open_spider(self, spider: BaseSpider):
-        self.file = open('url.txt', 'w')
+        self.file = open('url.txt', 'w', encoding='utf-8')
 
     def close_spider(self, spider: BaseSpider):
         self.file.close()
@@ -28,7 +28,7 @@ class BrazzersPipeline:
 
 class SaveInfoPipeline:
     def open_spider(self, spider: BaseSpider):
-        self.file = open('info.txt', 'w')
+        self.file = open('info.txt', 'w', encoding='utf-8')
 
     def close_spider(self, spider: BaseSpider):
         self.file.close()
