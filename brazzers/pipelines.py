@@ -62,7 +62,7 @@ class DownloadPipeline:
                 'params': [token]
             }
             active = 10
-            while active < 3:
+            while active > 2:
                 time.sleep(20)
-                active = requests.post(url=base_url, json=status_data).json().get('result').get('numActive')
+                active = int(requests.post(url=base_url, json=status_data).json().get('result').get('numActive'))
         return item
