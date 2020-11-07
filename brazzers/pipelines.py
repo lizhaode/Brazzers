@@ -6,7 +6,6 @@
 
 # useful for handling different item types with a single interface
 import requests
-import time
 
 from brazzers.items import BrazzersItem
 from brazzers.lib.download_header import random_other_headers
@@ -43,7 +42,7 @@ class SaveInfoPipeline:
 
 class DownloadPipeline:
     def process_item(self, item, spider: BaseSpider):
-        base_url = 'http://127.0.0.1:8900/jsonrpc'
+        base_url = 'http://127.0.0.1:8800/jsonrpc'
         token = 'token:' + spider.settings.get('ARIA_TOKEN')
         if isinstance(item, BrazzersItem):
             download_data = {
