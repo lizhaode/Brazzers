@@ -42,7 +42,7 @@ class SaveInfoPipeline:
 
 class DownloadPipeline:
     def process_item(self, item, spider: BaseSpider):
-        base_url = 'http://127.0.0.1:8800/jsonrpc'
+        base_url = 'http://127.0.0.1:6800/jsonrpc'
         token = 'token:' + spider.settings.get('ARIA_TOKEN')
         if isinstance(item, BrazzersItem):
             download_data = {
