@@ -51,7 +51,8 @@ class BaseSpider(scrapy.Spider):
     def extract_download_url(self, result: dict) -> str or None:
         # 有的视频没有提供播放地址, 是一个 []
         video_info = result.get('videos')
-        if len(video_info) != 0:
+        # 有的视频 videos 下边只有一个 mediabook 没有 full
+        if len(video_info) > 1:
             files = video_info.get('full').get('files')
             if files.get('2160p') is not None:
                 return files.get('2160p').get('urls').get('download')
