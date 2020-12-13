@@ -12,20 +12,23 @@ class BaseSpider(scrapy.Spider):
     def start_requests(self):
         which = self.settings.get('WHICH_ENABLE')
         if which == 'tag':
-            tag_id = self.settings.get('TAG_ID')
-            base_url = 'https://site-api.project1service.com/v2/releases?limit=96&offset=0&type=scene&orderBy' \
-                       '=-dateReleased&tagId={0}'.format(tag_id)
+            tag_id = self.settings.getlist('TAG_ID')
+            for tag in tag_id:
+                base_url = 'https://site-api.project1service.com/v2/releases?limit=96&offset=0&type=scene&orderBy' \
+                           '=-dateReleased&tagId={0}'.format(tag)
+                yield scrapy.Request(url=base_url)
         elif which == 'date':
             start_date = self.settings.get('START_DATE')
             end_date = self.settings.get('END_DATE')
             base_url = 'https://site-api.project1service.com/v2/releases?dateReleased=>{0},' \
                        '<{1}&limit=96&offset=0&type=scene&orderBy=-dateReleased&type=scene'.format(start_date, end_date)
+            yield scrapy.Request(url=base_url)
         else:
-            collection_id = self.settings.get('COLLECTION_ID')
-            base_url = 'https://site-api.project1service.com/v2/releases?limit=96&offset=0&type=scene&orderBy' \
-                       '=-dateReleased&collectionId={0}'.format(collection_id)
-
-        yield scrapy.Request(url=base_url)
+            collection_id = self.settings.getlist('COLLECTION_ID')
+            for collection in collection_id:
+                base_url = 'https://site-api.project1service.com/v2/releases?limit=96&offset=0&type=scene&orderBy' \
+                           '=-dateReleased&collectionId={0}'.format(collection)
+                yield scrapy.Request(url=base_url)
 
     def parse(self, response: HtmlResponse, **kwargs):
         total = response.json().get('meta').get('total')
