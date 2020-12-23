@@ -17,6 +17,14 @@ class BaseSpider(scrapy.Spider):
                 base_url = 'https://site-api.project1service.com/v2/releases?limit=96&offset=0&type=scene&orderBy' \
                            '=-dateReleased&tagId={0}'.format(tag)
                 yield scrapy.Request(url=base_url)
+        elif which == 'tag-date':
+            tag_id = self.settings.getlist('TAG_ID')
+            start_date = self.settings.get('START_DATE')
+            end_date = self.settings.get('END_DATE')
+            for tag in tag_id:
+                base_url = 'https://site-api.project1service.com/v2/releases?limit=96&offset=0&type=scene&orderBy' \
+                           '=-dateReleased&dateReleased=>{0},<{1}&tagId={2}'.format(start_date, end_date, tag)
+                yield scrapy.Request(url=base_url)
         elif which == 'date':
             start_date = self.settings.get('START_DATE')
             end_date = self.settings.get('END_DATE')

@@ -20,12 +20,12 @@ RETRY_ENABLED = True
 RETRY_TIMES = 10
 RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 408]
 
-START_DATE = '2020-05-01'
-END_DATE = '2020-10-08'
+START_DATE = '2019-12-01'
+END_DATE = '2020-12-31'
 TAG_ID = ['']
 COLLECTION_ID = ['']
 ARIA_TOKEN = ''
-WHICH_ENABLE = 'tag'
+WHICH_ENABLE = 'tag-date'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) ' \
